@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Client ID Card</title>
+    <script src="JsBarcode.all.min.js"></script>
     <style>
         @media print {
             @page {
@@ -125,6 +126,9 @@
             <hr />
             <div class="sub">DOB</div>
         </div>
+        <div id="barcode">
+            <svg id="code128"></svg>
+        </div>
         <div id="allergies">
             <u>ALLERGIES</u>
 
@@ -153,6 +157,8 @@
                 preview.src = URL.createObjectURL(blob);
             }
         }
+
+        JsBarcode("#code128", "Hi!");
  
     </script>
 
