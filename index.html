@@ -179,13 +179,18 @@
         }
 
         function generate_barcode(value) {
-            JsBarcode("#barcode", value, {
-                format: "CODE128",
-                lineColor: "#000",
-                width:8,
-                height:60,
-                displayValue: false
-              });
+            if(value!==""){
+                JsBarcode("#barcode", value, {
+                    format: "CODE128",
+                    lineColor: "#000",
+                    width:8,
+                    height:60,
+                    displayValue: false
+                  });
+                return;
+            }
+
+            document.getElementById("barcode").style.visibility = "hidden";
 
         } 
     </script>
