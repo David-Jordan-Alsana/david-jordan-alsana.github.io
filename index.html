@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Client ID Card</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/barcodes/JsBarcode.code128.min.js"></script>
     <style>
         @media print {
             @page {
@@ -59,6 +58,13 @@
             top: 0.25in;
         }
 
+        #pronouns {
+            width: 2in;
+            position: absolute;
+            left: 0.25in;
+            top: 1in;
+        }
+
         #allergies {
             display: flex;
             flex-direction: column;
@@ -83,21 +89,6 @@
             height: 2.2in;
             bottom: 0.25in;
             right: 0.25in;
-        }
-
-        #barcode {
-            position: absolute;
-            width: 100%;
-            height: 0.3in;
-            top: 1in;
-        }
-
-        #barcode-input {
-            position: absolute;
-            width: 100%;
-            height: 0.3in;
-            top: 4in;
-            border: 1px black solid;
         }
 
         .sub {
@@ -145,9 +136,11 @@
             <hr />
             <div class="sub">DOB</div>
         </div>
-
-        <input class="no-print" id="barcode-input" onchange="generate_barcode(this.value)" placeholder="MRN Number (Optional)">
-        <svg id="barcode"></svg>
+        <div id="pronouns">
+            <div><input></div>
+            <hr />
+            <div class="sub">Pronouns</div>
+        </div>
 
         <div id="allergies">
             <u>ALLERGIES</u>
@@ -177,23 +170,6 @@
                 preview.src = URL.createObjectURL(blob);
             }
         }
-
-        function generate_barcode(value) {
-            if(value!==""){
-                JsBarcode("#barcode", value, {
-                    format: "CODE128",
-                    lineColor: "#000",
-                    width:8,
-                    height:60,
-                    displayValue: false
-                  });
-                return;
-            }
-
-            document.getElementById("barcode").style.visibility = "hidden";
-
-        } 
-    </script>
 
 </body>
 </html>
