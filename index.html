@@ -59,21 +59,36 @@
         }
 
         #pronouns {
-            width: 2in;
+            width: 1in;
             position: absolute;
             left: 0.25in;
             top: 1in;
+        }
+        #pronouns input {
+            font-size: 12pt;
+        }
+
+        #alerts {
+            width: 4in;
+            position: absolute;
+            left: 1.75in;
+            top: 1in;
+        }
+        #alerts input {
+            font-size: 16pt;
+            color: red;
         }
 
         #allergies {
             display: flex;
             flex-direction: column;
-            width: 2.2in;
-            height: 2.2in;
+            width: 2.75in;
+            height: 2in;
             position: absolute;
             bottom: 0.25in;
             left: 0.25in;
             text-align: center;
+            background-color: lightgray;
         }
 
             #allergies span {
@@ -142,6 +157,12 @@
             <div class="sub">Pronouns</div>
         </div>
 
+        <div id="alerts">
+            <div><input></div>
+            <hr />
+            <div class="sub">Alerts</div>
+        </div>
+
         <div id="allergies">
             <u>ALLERGIES</u>
 
@@ -153,7 +174,6 @@
     </div>
 
     <script>
-
         const preview = document.querySelector('#preview');
         preview.addEventListener('click', pasteImage);
 
@@ -170,6 +190,7 @@
                 preview.src = URL.createObjectURL(blob);
             }
         }
+    </script>
 
 </body>
 </html>
