@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client ID Card</title>
+    <style>
+        @media print {
+            @page {
+                size: 5in 3in landscape;
+                margin: 0in;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        hr {
+            border: 1px solid black;
+            margin: 1px;
+        }
+
+        span {
+            width: 100%;
+            height: 100%;
+        }
+
+        #container {
+            min-width: 5in;
+            max-width: 5in;
+            min-height: 3in;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 20pt;
+            position: relative;
+        }
+
+        #name-container {
+            width: 2.5in;
+            position: absolute;
+            top: 0.25in;
+            left: 0.25in;
+        }
+
+        #dob {
+            width: 1.75in;
+            position: absolute;
+            left: 3in;
+            top: 0.25in;
+        }
+
+        #pronouns {
+            width: 1in;
+            position: absolute;
+            left: 0.25in;
+            top: 0.75in;
+        }
+        #pronouns input {
+            font-size: 12pt;
+        }
+
+        #alerts {
+            width: 3in;
+            position: absolute;
+            left: 1.75in;
+            top: 0.75in;
+        }
+        #alerts input {
+            font-size: 12pt;
+            color: red;
+        }
+
+        #allergies {
+            display: flex;
+            flex-direction: column;
+            width: 2.5in;
+            height: 1.25in;
+            position: absolute;
+            bottom: 0.25in;
+            left: 0.25in;
+            text-align: center;
+            background-color: lightgray;
+            font-size: 14pt;
+        }
+
+            #allergies span {
+                display: flex;
+                line-height: normal;
+                align-items: center;
+                justify-content: center;
+            }
+
+        #picture {
+            position: absolute;
+            width: 1.5in;
+            height: 1.5in;
+            bottom: 0.25in;
+            right: 0.25in;
+        }
+
+        .sub {
+            font-size: 12px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            font-size: 20pt;
+            border: none;
+        }
+
+        textarea {
+            border: none;
+            resize: none;
+            width: 100%;
+            height: 100%;
+            font-size: 16pt;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="container">
+        <div id="name-container">
+            <div><input></div>
+            <hr />
+            <div class="sub">Name</div>
+        </div>
+        <div id="dob">
+            <div><input></div>
+            <hr />
+            <div class="sub">DOB</div>
+        </div>
+        <div id="pronouns">
+            <div><input></div>
+            <hr />
+            <div class="sub">Pronouns</div>
+        </div>
+
+        <div id="alerts">
+            <div><input></div>
+            <hr />
+            <div class="sub">Alerts</div>
+        </div>
+
+        <div id="allergies">
+            <u>ALLERGIES</u>
+
+            <textarea></textarea>
+        </div>
+        <div id="picture">
+            <img id="preview">
+        </div>
+    </div>
+
+    <script>
+        const preview = document.querySelector('#preview');
+        preview.addEventListener('click', pasteImage);
+
+        async function pasteImage() {
+            const clipboardContents = await navigator.clipboard.read();
+
+            for (const item of clipboardContents) {
+
+                if (!item.types.includes('image/png')) {
+                    throw new Error("Clipboard does not contain an image.");
+                }
+
+                var blob = await item.getType('image/png');
+                preview.src = URL.createObjectURL(blob);
+            }
+        }
+    </script>
+
+</body>
+</html>
